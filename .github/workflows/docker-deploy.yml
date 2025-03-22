@@ -18,7 +18,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: yourusername  # Replace with your GitHub username
+          username: IbrahimAL22  # Replace with your GitHub username
           password: ${{ secrets.CR_PAT }}
 
       - name: Build and push Docker image
