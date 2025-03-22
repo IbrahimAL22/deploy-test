@@ -9,14 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - uses: actions/checkout@v3
 
-      # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Log in to GitHub Container Registry
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -24,16 +21,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and push the Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          # Replace "yourusername" with your GitHub username or organization name
-          tags: ghcr.io/test:latest
+          # Replace "yourusername" with your actual GitHub username.
+          tags: ghcr.io/yourusername/test:latest
 
-      # Deploy to VPS using credentials directly (insecure)
       - name: Deploy to VPS via systemd using password
         uses: appleboy/ssh-action@v0.1.6
         with:
