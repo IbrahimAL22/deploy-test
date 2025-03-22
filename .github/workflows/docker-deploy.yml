@@ -26,7 +26,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/IbrahimAL22/test:latest
+          tags: ghcr.io/ibrahimal22/test:latest
 
       - name: Deploy to VPS via systemd using password
         uses: appleboy/ssh-action@v0.1.6
