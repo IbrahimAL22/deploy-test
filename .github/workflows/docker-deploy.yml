@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the repo
+      # Checkout the repository
       - uses: actions/checkout@v3
 
-      # Set up Docker Buildx (for advanced build features)
+      # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -30,17 +30,15 @@ jobs:
         with:
           context: .
           push: true
+          # Replace "yourusername" with your GitHub username or organization name
           tags: ghcr.io/test:latest
 
-      # Deploy to the VPS using SSH
-      - name: Deploy to VPS
+      # Deploy to VPS using credentials directly (insecure)
+      - name: Deploy to VPS via systemd using password
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: "164.92.204.82"
+          username: "root"
+          password: "A8z#K9v*Qp!X3t@L6w"
           script: |
-            docker pull ghcr.io/test:latest
-            docker stop flask_app || true
-            docker rm flask_app || true
-            docker run -d --name flask_app -p 80:5000 ghcr.io/test:latest
+            sudo systemctl restart flask_app.service
