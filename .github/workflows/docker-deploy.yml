@@ -43,4 +43,4 @@ jobs:
             docker pull ghcr.io/test:latest
             docker stop flask_app || true
             docker rm flask_app || true
-            docker run -d --name flask_app -p 80:5000 ghcr.io/${{ github.repository }}:latest
+            docker run -d --name flask_app -p 80:5000 ghcr.io/test:latest
